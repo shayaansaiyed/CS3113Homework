@@ -10,6 +10,7 @@
 #include "stb_image.h"
 #include <cassert>
 
+
 #ifdef _WINDOWS
 #define RESOURCE_FOLDER ""
 #else
@@ -54,9 +55,9 @@ int main(int argc, char *argv[])
     ShaderProgram program(RESOURCE_FOLDER"vertex_textured.glsl", RESOURCE_FOLDER"fragment_textured.glsl");
     
     //Load all textures
-    GLuint TaylorTexture = LoadTexture(RESOURCE_FOLDER"TS.jpg");
-    GLuint KatyTexture = LoadTexture(RESOURCE_FOLDER"katyperry.jpeg");
-    GLuint KimTexture = LoadTexture(RESOURCE_FOLDER"Kim.jpg");
+    GLuint TaylorTexture = LoadTexture("TS.jpg");
+    GLuint KatyTexture = LoadTexture("katyperry.jpeg");
+    GLuint KimTexture = LoadTexture("Kim.jpg");
     
     glViewport(0, 0, 640, 360); //Set the size and offset of the rendering area
     
