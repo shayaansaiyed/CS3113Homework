@@ -15,6 +15,7 @@
 #define RESOURCE_FOLDER ""
 #else
 #define RESOURCE_FOLDER "NYUCodebase.app/Contents/Resources/"
+#define RESOURCE "/Users/shayaansaiyed/Documents/School/Game/CS3113Homework/HomeWork 1/NYUCodebase/"
 #endif
 
 SDL_Window* displayWindow;
@@ -55,9 +56,9 @@ int main(int argc, char *argv[])
     ShaderProgram program(RESOURCE_FOLDER"vertex_textured.glsl", RESOURCE_FOLDER"fragment_textured.glsl");
     
     //Load all textures
-    GLuint TaylorTexture = LoadTexture("TS.jpg");
-    GLuint KatyTexture = LoadTexture("katyperry.jpeg");
-    GLuint KimTexture = LoadTexture("Kim.jpg");
+    GLuint TaylorTexture = LoadTexture(RESOURCE"TS.jpg");
+    GLuint KatyTexture = LoadTexture(RESOURCE"katyperry.jpeg");
+    GLuint KimTexture = LoadTexture(RESOURCE"Kim.jpg");
     
     glViewport(0, 0, 640, 360); //Set the size and offset of the rendering area
     
