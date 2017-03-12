@@ -104,18 +104,18 @@ int main(int argc, char *argv[])
     ShaderProgram program = Setup();
     
     //Load all textures
-    GLuint SnapChatTexture = LoadTexture("Snapchat.png");
-    GLuint GrammyTexture = LoadTexture("grammy.png");
-    GLuint BGTaylorWinTexture = LoadTexture("TaylorWins.gif");
-    GLuint BGKimWinTexture = LoadTexture("KimWins.png");
+    GLuint SnapChatTexture = LoadTexture(RESOURCE"Snapchat.png");
+    GLuint GrammyTexture = LoadTexture(RESOURCE"grammy.png");
+    GLuint BGTaylorWinTexture = LoadTexture(RESOURCE"TaylorWins.gif");
+    GLuint BGKimWinTexture = LoadTexture(RESOURCE"KimWins.png");
     
     Entity rpaddle;
     Entity lpaddle;
     Entity ball;
     Entity background;
     
-    rpaddle.textureID = LoadTexture("Taylor.png");
-    lpaddle.textureID = LoadTexture("Kim.png");
+    rpaddle.textureID = LoadTexture(RESOURCE"Taylor.png");
+    lpaddle.textureID = LoadTexture(RESOURCE"Kim.png");
     
     Matrix projectionMatrix;
     Matrix modelMatrix;

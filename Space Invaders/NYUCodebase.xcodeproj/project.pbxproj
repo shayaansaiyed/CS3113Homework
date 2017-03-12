@@ -21,6 +21,9 @@
 		6DEF23C21B96CC2600BCE792 /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DEF23BC1B96CC2600BCE792 /* Matrix.cpp */; };
 		6DEF23C31B96CC2600BCE792 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DEF23BE1B96CC2600BCE792 /* ShaderProgram.cpp */; };
 		6DEF23C41B96CC2600BCE792 /* vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 6DEF23C01B96CC2600BCE792 /* vertex.glsl */; };
+		7E40C4DB1E70880E00F7EC82 /* sheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E40C4DA1E70880E00F7EC82 /* sheet.png */; };
+		7E40C4DD1E7088A800F7EC82 /* font1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E40C4DC1E7088A800F7EC82 /* font1.png */; };
+		7E40C4DF1E70891A00F7EC82 /* pixel_font.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E40C4DE1E70891A00F7EC82 /* pixel_font.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,9 @@
 		6DEF23BE1B96CC2600BCE792 /* ShaderProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderProgram.cpp; sourceTree = "<group>"; };
 		6DEF23BF1B96CC2600BCE792 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
 		6DEF23C01B96CC2600BCE792 /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		7E40C4DA1E70880E00F7EC82 /* sheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sheet.png; path = NYUCodebase/sheet.png; sourceTree = "<group>"; };
+		7E40C4DC1E7088A800F7EC82 /* font1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font1.png; path = NYUCodebase/font1.png; sourceTree = "<group>"; };
+		7E40C4DE1E70891A00F7EC82 /* pixel_font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pixel_font.png; path = NYUCodebase/pixel_font.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,9 @@
 		6D5A86A119AE5C710066C1FD = {
 			isa = PBXGroup;
 			children = (
+				7E40C4DE1E70891A00F7EC82 /* pixel_font.png */,
+				7E40C4DC1E7088A800F7EC82 /* font1.png */,
+				7E40C4DA1E70880E00F7EC82 /* sheet.png */,
 				6D5A86B319AE5C710066C1FD /* NYUCodebase */,
 				6D5A86D119AE5C710066C1FD /* NYUCodebaseTests */,
 				6D5A86AC19AE5C710066C1FD /* Frameworks */,
@@ -213,8 +222,11 @@
 				6D5A86B819AE5C710066C1FD /* InfoPlist.strings in Resources */,
 				6DEF23C11B96CC2600BCE792 /* fragment.glsl in Resources */,
 				6DE9D2F11BA6AB8C002D599C /* fragment_textured.glsl in Resources */,
+				7E40C4DD1E7088A800F7EC82 /* font1.png in Resources */,
 				6D5A86C619AE5C710066C1FD /* Images.xcassets in Resources */,
 				6D5A86BE19AE5C710066C1FD /* Credits.rtf in Resources */,
+				7E40C4DB1E70880E00F7EC82 /* sheet.png in Resources */,
+				7E40C4DF1E70891A00F7EC82 /* pixel_font.png in Resources */,
 				6DEF23C41B96CC2600BCE792 /* vertex.glsl in Resources */,
 				6DC7076A1BA7273500225B7D /* vertex_textured.glsl in Resources */,
 			);
