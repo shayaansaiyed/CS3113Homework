@@ -82,11 +82,11 @@ int main(int argc, char *argv[])
             }
         }
         
-        //Get the time elapsed since the last iteration fo the loop
-        float ticks = (float)SDL_GetTicks()/1000.0f;
-        float elapsed = ticks - lastFrameTicks;
-        lastFrameTicks = ticks;
-        angle += elapsed;
+//        //Get the time elapsed since the last iteration fo the loop
+//        float ticks = (float)SDL_GetTicks()/1000.0f;
+//        float elapsed = ticks - lastFrameTicks;
+//        lastFrameTicks = ticks;
+//        angle += elapsed;
         
         program.setProjectionMatrix(projectionMatrix);
         program.setViewMatrix(viewMatrix);
@@ -94,63 +94,63 @@ int main(int argc, char *argv[])
         
         //___________KIM KARDASHIAN____________
         
-        modelMatrix.identity();
-        
-        modelMatrix.Translate(-2.0f, 0.0f, 0.0f);
-        modelMatrix.Rotate(-45.0 * angle * 3.1417 / 180.0);
-        
-        program.setModelMatrix(modelMatrix);
-        
-        glBindTexture(GL_TEXTURE_2D, KimTexture);
-        
-        float verticesKim[] = {-3.0, -3.0, 3.0, -3.0, 3.0, 3.0, -3.0, -3.0, 3.0, 3.0, -3.0, 3.0};
-        glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, verticesKim);
-        glEnableVertexAttribArray(program.positionAttribute);
-        float texCoordsKim[] = {0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0};
-        glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoordsKim);
-        glEnableVertexAttribArray(program.texCoordAttribute);
-        
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        
-        //___________TAYLOR SWIFT____________
-        
-        modelMatrix.identity();
-        
-        modelMatrix.Translate(1.0f, 0.0f, 0.0f);
-        modelMatrix.Rotate(45.0 * angle * 3.1417 / 180.0);
-        
-        program.setModelMatrix(modelMatrix);
-        
-        glBindTexture(GL_TEXTURE_2D, TaylorTexture);
-        
-        float verticesTaylor[] = {-1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5};
-        glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, verticesTaylor);
-        glEnableVertexAttribArray(program.positionAttribute);
-        float texCoordsTaylor[] = {0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0};
-        glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoordsTaylor);
-        glEnableVertexAttribArray(program.texCoordAttribute);
-        
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        
-        //___________Katy Perry____________
-        
-        modelMatrix.identity();
-        
-        modelMatrix.Translate(3.0f, 0.0f, 0.0f);
-        modelMatrix.Rotate(-45.0 * angle * 3.1417 / 180.0);
-        
-        program.setModelMatrix(modelMatrix);
-        
-        glBindTexture(GL_TEXTURE_2D, KatyTexture);
-        
-        float verticesKaty[] = {-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5};
-        glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, verticesKaty);
-        glEnableVertexAttribArray(program.positionAttribute);
-        float texCoordsKaty[] = {0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0};
-        glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoordsKaty);
-        glEnableVertexAttribArray(program.texCoordAttribute);
-        
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+//        modelMatrix.identity();
+//        
+//        modelMatrix.Translate(-2.0f, 0.0f, 0.0f);
+//        modelMatrix.Rotate(-45.0 * angle * 3.1417 / 180.0);
+//        
+//        program.setModelMatrix(modelMatrix);
+//        
+//        glBindTexture(GL_TEXTURE_2D, KimTexture);
+//        
+//        float verticesKim[] = {-3.0, -3.0, 3.0, -3.0, 3.0, 3.0, -3.0, -3.0, 3.0, 3.0, -3.0, 3.0};
+//        glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, verticesKim);
+//        glEnableVertexAttribArray(program.positionAttribute);
+//        float texCoordsKim[] = {0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0};
+//        glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoordsKim);
+//        glEnableVertexAttribArray(program.texCoordAttribute);
+//        
+//        glDrawArrays(GL_TRIANGLES, 0, 6);
+//        
+//        //___________TAYLOR SWIFT____________
+//        
+//        modelMatrix.identity();
+//        
+//        modelMatrix.Translate(1.0f, 0.0f, 0.0f);
+//        modelMatrix.Rotate(45.0 * angle * 3.1417 / 180.0);
+//        
+//        program.setModelMatrix(modelMatrix);
+//        
+//        glBindTexture(GL_TEXTURE_2D, TaylorTexture);
+//        
+//        float verticesTaylor[] = {-1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5};
+//        glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, verticesTaylor);
+//        glEnableVertexAttribArray(program.positionAttribute);
+//        float texCoordsTaylor[] = {0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0};
+//        glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoordsTaylor);
+//        glEnableVertexAttribArray(program.texCoordAttribute);
+//        
+//        glDrawArrays(GL_TRIANGLES, 0, 6);
+//        
+//        //___________Katy Perry____________
+//        
+//        modelMatrix.identity();
+//        
+//        modelMatrix.Translate(3.0f, 0.0f, 0.0f);
+//        modelMatrix.Rotate(-45.0 * angle * 3.1417 / 180.0);
+//        
+//        program.setModelMatrix(modelMatrix);
+//        
+//        glBindTexture(GL_TEXTURE_2D, KatyTexture);
+//        
+//        float verticesKaty[] = {-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5};
+//        glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, verticesKaty);
+//        glEnableVertexAttribArray(program.positionAttribute);
+//        float texCoordsKaty[] = {0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0};
+//        glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoordsKaty);
+//        glEnableVertexAttribArray(program.texCoordAttribute);
+//        
+//        glDrawArrays(GL_TRIANGLES, 0, 6);
         
         SDL_GL_SwapWindow(displayWindow);
         glClear(GL_COLOR_BUFFER_BIT);
