@@ -28,7 +28,7 @@ SDL_Window* displayWindow;
 
 using namespace std;
 
-enum GameState { STATE_START_SCREEN, STATE_GAME, STATE_LOST };
+enum GameState {STATE_START_SCREEN, STATE_GAME, STATE_LOST, STATE_WON};
 enum EntityType {PLAYER, ENEMY, BULLET};
 
 //-------------MAP-------------------
@@ -99,7 +99,6 @@ bool readLayerData(std::ifstream &stream) {
 void placeEntity(string type, float placeX, float placeY);
 
 bool readEntityData(std::ifstream &stream) {
-    cout << "got here";
     string line;
     string type;
     while(getline(stream, line)) {
@@ -358,11 +357,10 @@ Entity Grammys[MAX_COINS];
 int grammyIndex = 0;
 
 void placeEntity(string type, float placeX, float placeY){
-    cout << "Place: " << placeX << "," << placeY << endl;
     if (grammyIndex >= MAX_COINS){
         grammyIndex %= MAX_COINS;
     }
-    cout << "Grammy Index" << grammyIndex << endl;
+
     Grammys[grammyIndex].position.x = placeX;
     Grammys[grammyIndex].position.y = placeY;
     Grammys[grammyIndex].sprite = SheetSprite(tileSheetTexture, 12.0/16.0, 0, 16.0/256.0, 16.0/128.0, 0.5);
@@ -496,7 +494,7 @@ void setupPlayer(){
 
 //      MAIN SETUP FUNCTION
 ShaderProgram Setup(){
-    cout << "SETUP\n";
+
     SDL_Init(SDL_INIT_VIDEO);
     displayWindow = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 360, SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
@@ -520,6 +518,8 @@ ShaderProgram Setup(){
     setupPlayer();
     createMap();
     
+    state= STATE_GAME;
+    
     return program;
 }
 
@@ -536,7 +536,7 @@ float scaleAmount = 0.0;
 
 bool playerJump = false;
 
-void ProcessInput(bool& done){
+void ProcessInputGame(bool& done){
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
@@ -566,19 +566,38 @@ void ProcessInput(bool& done){
     }
 }
 
+void ProcessInputStartScreen(bool& done){
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
+            done = true;
+        }
+    }
+    const Uint8 *keys = SDL_GetKeyboardState(NULL);
+    if (keys[SDL_SCANCODE_RETURN]){
+        state = STATE_GAME;
+    }
+}
+
+void ProcessInput(bool& done){
+    if (state == STATE_GAME){
+        ProcessInputGame(done);
+    } else if (state == STATE_START_SCREEN){
+        ProcessInputStartScreen(done);
+    }
+}
+
 
 //-------------UPDATE---------------
 
 void collidesWithGrammy(){
     player.getTopBottomLeftRight();
-    cout << "CHECK COLLIDES" << endl;
     for (int i = 0; i < MAX_COINS; i++){
         Grammys[i].getTopBottomLeftRight();
         if (!((player.bottom >= Grammys[i].top + 2.0)
         || (player.top <= Grammys[i].bottom + 2.0)
             || (player.left >= Grammys[i].right - 3.70)
             || (player.right <= Grammys[i].left - 3.70))) {
-            cout << "COLLIDES" << endl;
             Grammys[i].position.y = 2000;
         }
     }
@@ -610,7 +629,9 @@ void UpdatePlayer(float elapsed){
 }
 
 void Update(float elapsed){
-    UpdatePlayer(elapsed);
+    if (state == STATE_GAME){
+        UpdatePlayer(elapsed);
+    }
 }
 
 
@@ -619,9 +640,8 @@ void Update(float elapsed){
 //-------------RENDER---------------
 
 
-//      MAIN RENDER PROGRAM
-void Render(ShaderProgram program){
-    cout << "RENDER\n";
+//      GAME RENDER PROGRAM
+void RenderGameState(ShaderProgram program){
     modelMatrix.identity();
     modelMatrix.Translate(-3.7, 2.0, 0.0);
     program.setModelMatrix(modelMatrix);
@@ -636,8 +656,6 @@ void Render(ShaderProgram program){
         modelMatrix.identity();
         modelMatrix.Translate(-3.7, 2.0+TILE_SIZE, 0.0);
         modelMatrix.Translate(Grammys[i].position.x, Grammys[i].position.y, 0.0);
-        cout << "grammy position: " << Grammys[i].position.x << " " << Grammys[i].position.y << endl;
-        cout << "Player position: " << player.position.x << " " << player.position.y << endl;
         program.setModelMatrix(modelMatrix);
         Grammys[i].sprite.Draw(program);
     }
@@ -645,10 +663,53 @@ void Render(ShaderProgram program){
     orthographicMatrix.identity();
     orthographicMatrix.Translate(-player.position.x, 0.0, 0.0);
     program.setViewMatrix(orthographicMatrix);
-    
-
 }
 
+void RenderStartScreen(ShaderProgram program){
+    int startscreenTexture = LoadTexture(RESOURCE_FOLDER"startScreen.png");
+    modelMatrix.identity();
+   // modelMatrix.Translate(-3.7, 2.0, 0.0);
+    
+    glBindTexture(GL_TEXTURE_2D, startscreenTexture);
+    
+    GLfloat texCoords[] = {
+        0.0, 1.0,
+        1.0, 0.0,
+        0.0, 0.0,
+        1.0, 0.0,
+        0.0, 1.0,
+        1.0, 1.0
+    };
+    
+    
+    float vertices[] = {
+        -3.7, -2.0,
+        3.70, 2.0,
+        -3.70, 2.0,
+        3.70, 2.0,
+        -3.70, -2.0 ,
+        3.70, -2.0
+    };
+    
+    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program.positionAttribute);
+    
+    glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
+    glEnableVertexAttribArray(program.texCoordAttribute);
+    
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+//MAIN RENDER PROGRAM
+void Render (ShaderProgram program){
+    if (state == STATE_GAME){
+        RenderGameState(program);
+    } else if (state == STATE_START_SCREEN){
+        RenderStartScreen(program);
+    } else if (state == STATE_WON){
+        
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -661,7 +722,7 @@ int main(int argc, char *argv[])
         float elapsed = ticks - lastFrameTicks;
         lastFrameTicks = ticks;
         
-        cout << "Player Position: "  <<player.position.x << " "  << player.position.y << endl;
+
         
         ProcessInput(done);
         Update(elapsed);
@@ -670,7 +731,6 @@ int main(int argc, char *argv[])
         glClear(GL_COLOR_BUFFER_BIT);
         
     }
-    cout << "x amount: " << xcounter << "\ny amount: " << ycounter << "\nscale amount: " << scaleAmount;
     SDL_Quit();
     return 0;
 }
