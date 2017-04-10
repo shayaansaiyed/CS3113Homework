@@ -37,11 +37,21 @@ Matrix orthographicMatrix;
 
 float lastFrameTicks = 0.0f;
 
-Vector poly1_pos;
-Vector poly2_pos;
+class Entity{
+public:
+    Entity(){};
+    Vector position;
+    float rotation;
+    GLuint textureID;
+    Vector velocity;
+    Vector acceleration;
+    vector<Vector> edges;
+    Matrix matrix;
+    void drawPolygon(ShaderProgram program, float vertices[]);
+};
 
-Vector poly1_velocity;
-Vector poly2_velocity;
+Entity polygon1;
+Entity polygon2;
 
 Vector collision;
 
@@ -202,10 +212,10 @@ ShaderProgram Setup(){
     program.setProjectionMatrix(projectionMatrix);
     program.setViewMatrix(orthographicMatrix);
     
-    poly1_pos.x = -2.75;
-    poly2_pos.x = 2.75;
-    poly1_velocity.x = 1.0;
-    poly2_velocity.x = -1.0;
+    polygon1.position.x = -2.75;
+    polygon2.position.x = 2.75;
+    polygon1.velocity.x = 1.0;
+    polygon2.velocity.x = -1.0;
     
     edges1[0].x = 3;
     
@@ -213,21 +223,23 @@ ShaderProgram Setup(){
 }
 
 void Update(float elapsed){
-    poly1_pos.x += poly1_velocity.x * elapsed;
-    poly1_pos.y += poly1_velocity.y * elapsed;
+
+    polygon1.position.x += polygon1.velocity.x * elapsed;
+    polygon1.position.y += polygon1.velocity.y * elapsed;
     
-    poly2_pos.x += poly2_velocity.x * elapsed;
-    poly2_pos.y += poly2_velocity.y * elapsed;
+    polygon2.position.x += polygon2.velocity.x * elapsed;
+    polygon2.position.y += polygon2.velocity.y * elapsed;
 }
 
 
-void drawPolygon(ShaderProgram program, float vertices[]){
-    program.setModelMatrix(modelMatrix);
+void Entity::drawPolygon(ShaderProgram program, float vertices[]){
+    program.setModelMatrix(matrix);
     glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
     glEnableVertexAttribArray(program.positionAttribute);
     glDrawArrays(GL_LINE_LOOP, 0, 5);
     glDisableVertexAttribArray(program.positionAttribute);
 }
+
 
 void Render(ShaderProgram program){
     float vertices1[] = {
@@ -236,8 +248,7 @@ void Render(ShaderProgram program){
         0.00, -1.0,
         1.25, 0.00,
         0.75, 1.00
-    }
-    ;
+    };
     float vertices2[] = {
         0.5, 1.0,
         -0.5, 1.0,
@@ -246,21 +257,36 @@ void Render(ShaderProgram program){
         1.0, 0.5
     };
     
-    for(int i = 0; i < 5; i++){
-        edges1[i].x = vertices1[i * 2] + poly1_pos.x;
-        edges1[i].y = vertices1[i * 2 + 1] + poly1_pos.y;
-        
-        edges2[i].x = vertices2[i * 2] + poly2_pos.x;
-        edges2[i].y = vertices2[i * 2 + 1] + poly2_pos.y;
-        
+    if (polygon1.edges.empty()){
+        for(int i = 0; i < 5; i++){
+            polygon1.edges.push_back(Vector(vertices1[i * 2] + polygon1.position.x, vertices1[i * 2 + 1] + polygon1.position.y, 0.0));
+        }
+    }
+    else {
+        for(int i = 0; i < 5; i++){
+            polygon1.edges[i].x = vertices1[i * 2] + polygon1.position.x;
+            polygon1.edges[i].y = vertices1[i * 2 + 1] + polygon1.position.y;
+        }
+    }
+    
+    if (polygon2.edges.empty()){
+        for(int i = 0; i < 5; i++){
+            polygon2.edges.push_back(Vector(vertices1[i * 2] + polygon2.position.x, vertices1[i * 2 + 1] + polygon2.position.y, 0.0));
+        }
+    }
+    else {
+        for(int i = 0; i < 5; i++){
+            polygon2.edges[i].x = vertices1[i * 2] + polygon2.position.x;
+            polygon2.edges[i].y = vertices1[i * 2 + 1] + polygon2.position.y;
+        }
     }
     
     bool collided = false;
     float xpenetration, ypenetration;
     
-    cout << "x:" << collision.x << " " << "y:" << collision.y;
+    cout << "collision x:" << collision.x << " " << "collision y:" << collision.y;
     
-    collided = checkSATCollision(edges1, edges2, collision);
+    collided = checkSATCollision(polygon1.edges, polygon2.edges, collision);
     if (collided){
         
         xpenetration = collision.x;
@@ -271,27 +297,27 @@ void Render(ShaderProgram program){
         collision.x /= fabs(collision.x);
         collision.y /= fabs(collision.y);
         
-        poly1_velocity.x *= -collision.x;
-        poly1_velocity.y *= -collision.y;
+        polygon1.velocity.x *= -collision.x;
+        polygon1.velocity.y *= -collision.y;
         
-        poly1_pos.x += -0.5 * xpenetration;
-        poly1_pos.y += -0.5 * ypenetration;
+        polygon1.position.x += -0.5 * xpenetration;
+        polygon1.position.y += -0.5 * ypenetration;
         
-        poly2_velocity.x *= -collision.x;
-        poly2_velocity.y *= -collision.y;
+        polygon2.velocity.x *= -collision.x;
+        polygon2.velocity.y *= -collision.y;
         
-        poly2_pos.x += -0.5 * xpenetration;
-        poly2_pos.y += -0.5 * ypenetration;
+        polygon2.position.x += -0.5 * xpenetration;
+        polygon2.position.x += -0.5 * ypenetration;
     }
     
-    modelMatrix.identity();
-    modelMatrix.Translate(poly1_pos.x, poly1_pos.y, poly1_pos.z);
+    //modelMatrix.identity();
+    polygon1.matrix.identity();
+    polygon1.matrix.Translate(polygon1.position.x, polygon1.position.y, polygon1.position.z);
+    polygon1.drawPolygon(program, vertices1);
     
-    drawPolygon(program, vertices1);
-    
-    modelMatrix.identity();
-    modelMatrix.Translate(poly2_pos.x, poly2_pos.y, poly2_pos.z);
-    drawPolygon(program, vertices2);
+    polygon2.matrix.identity();
+    polygon2.matrix.Translate(polygon2.position.x, polygon2.position.y, polygon2.position.z);
+    polygon2.drawPolygon(program, vertices2);
     
 }
 
@@ -317,6 +343,10 @@ int main(int argc, char *argv[])
         program.setProjectionMatrix(projectionMatrix);
         program.setViewMatrix(orthographicMatrix);
         Render(program);
+        
+        for (size_t i = 0; i < polygon1.edges.size(); i++){
+            cout << "X: " << polygon1.edges[i].x << " Y: " << polygon1.edges[i].y << endl;
+        }
         
         SDL_GL_SwapWindow(displayWindow);
     }
