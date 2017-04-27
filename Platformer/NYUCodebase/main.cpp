@@ -518,7 +518,7 @@ ShaderProgram Setup(){
     setupPlayer();
     createMap();
     
-    state= STATE_GAME;
+    state  = STATE_GAME;
     
     return program;
 }
