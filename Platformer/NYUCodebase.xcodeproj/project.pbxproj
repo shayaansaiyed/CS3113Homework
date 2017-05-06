@@ -24,6 +24,7 @@
 		7E746E691E85B35D0000885A /* map.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7E746E681E85B35D0000885A /* map.txt */; };
 		7EF917061E8787CF00D451AF /* arne_sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF917051E8787CF00D451AF /* arne_sprites.png */; };
 		7EF9170A1E88DDD000D451AF /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF917091E88DDD000D451AF /* sprites.png */; };
+		7EFC61E41EBE4C0000860911 /* BeyonceSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EFC61E31EBE4C0000860911 /* BeyonceSprite.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		7E746E681E85B35D0000885A /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = map.txt; path = NYUCodebase/map.txt; sourceTree = "<group>"; };
 		7EF917051E8787CF00D451AF /* arne_sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arne_sprites.png; path = ../../CS3113/assets/sprite_sheets/arne_sprites.png; sourceTree = "<group>"; };
 		7EF917091E88DDD000D451AF /* sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sprites.png; path = ../../sprites.png; sourceTree = "<group>"; };
+		7EFC61E31EBE4C0000860911 /* BeyonceSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BeyonceSprite.png; path = NYUCodebase/BeyonceSprite.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 			children = (
 				7EF917091E88DDD000D451AF /* sprites.png */,
 				7E746E681E85B35D0000885A /* map.txt */,
+				7EFC61E31EBE4C0000860911 /* BeyonceSprite.png */,
 				7EF917051E8787CF00D451AF /* arne_sprites.png */,
 				6D5A86B319AE5C710066C1FD /* NYUCodebase */,
 				6D5A86D119AE5C710066C1FD /* NYUCodebaseTests */,
@@ -228,6 +231,7 @@
 				7EF9170A1E88DDD000D451AF /* sprites.png in Resources */,
 				6D5A86BE19AE5C710066C1FD /* Credits.rtf in Resources */,
 				6DEF23C41B96CC2600BCE792 /* vertex.glsl in Resources */,
+				7EFC61E41EBE4C0000860911 /* BeyonceSprite.png in Resources */,
 				6DC7076A1BA7273500225B7D /* vertex_textured.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
