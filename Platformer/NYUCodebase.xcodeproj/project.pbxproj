@@ -24,7 +24,6 @@
 		7E746E691E85B35D0000885A /* map.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7E746E681E85B35D0000885A /* map.txt */; };
 		7EF917061E8787CF00D451AF /* arne_sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF917051E8787CF00D451AF /* arne_sprites.png */; };
 		7EF9170A1E88DDD000D451AF /* sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF917091E88DDD000D451AF /* sprites.png */; };
-		7EF9171F1E8EF3D400D451AF /* startScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF9171E1E8EF3D400D451AF /* startScreen.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,7 +53,6 @@
 		7E746E681E85B35D0000885A /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = map.txt; path = NYUCodebase/map.txt; sourceTree = "<group>"; };
 		7EF917051E8787CF00D451AF /* arne_sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arne_sprites.png; path = ../../CS3113/assets/sprite_sheets/arne_sprites.png; sourceTree = "<group>"; };
 		7EF917091E88DDD000D451AF /* sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sprites.png; path = ../../sprites.png; sourceTree = "<group>"; };
-		7EF9171E1E8EF3D400D451AF /* startScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = startScreen.png; path = ../../../../../Desktop/ScreenShots/startScreen.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +73,6 @@
 		6D5A86A119AE5C710066C1FD = {
 			isa = PBXGroup;
 			children = (
-				7EF9171E1E8EF3D400D451AF /* startScreen.png */,
 				7EF917091E88DDD000D451AF /* sprites.png */,
 				7E746E681E85B35D0000885A /* map.txt */,
 				7EF917051E8787CF00D451AF /* arne_sprites.png */,
@@ -228,7 +225,6 @@
 				6DE9D2F11BA6AB8C002D599C /* fragment_textured.glsl in Resources */,
 				7E746E691E85B35D0000885A /* map.txt in Resources */,
 				6D5A86C619AE5C710066C1FD /* Images.xcassets in Resources */,
-				7EF9171F1E8EF3D400D451AF /* startScreen.png in Resources */,
 				7EF9170A1E88DDD000D451AF /* sprites.png in Resources */,
 				6D5A86BE19AE5C710066C1FD /* Credits.rtf in Resources */,
 				6DEF23C41B96CC2600BCE792 /* vertex.glsl in Resources */,
